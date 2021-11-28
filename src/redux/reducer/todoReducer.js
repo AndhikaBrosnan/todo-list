@@ -11,8 +11,8 @@ const todoReducer = (todo = INIT_TODO, action) => {
     case DELETE_TODO:
       return todo.filter((item) => item.id !== action.payload);
     case UPDATE_TODO:
-      todo.filter((item) => item.id !== action.payload);
-      return [...action.payload, ...todo];
+      const mytodo = todo.filter((item) => item.id !== action.payload.id);
+      return [action.payload, ...mytodo];
     default:
       return todo;
   }
