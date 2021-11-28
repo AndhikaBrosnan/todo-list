@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal } from "semantic-ui-react";
 import { deleteTodosData, updateTodosData } from "../../redux/action/todo";
@@ -10,6 +10,11 @@ const Todo = ({ id, title, description, createdAt }) => {
   const [descriptionTodo, setDescriptionTodo] = useState(description);
   const todos = useSelector((state) => state.todo);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setTitleTodo(title);
+    setDescriptionTodo(description); // eslint-disable-next-line
+  }, []);
 
   const handleDeleteSubmit = () => {
     setShow(false);

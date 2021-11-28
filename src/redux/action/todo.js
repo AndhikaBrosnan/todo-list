@@ -19,7 +19,7 @@ export const postTodosData = async (
   dispatch({
     type: POST_TODO,
     payload: {
-      id: 0,
+      id: lengthData + 1,
       title,
       description,
       status: 0,
