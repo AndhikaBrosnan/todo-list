@@ -11,21 +11,42 @@ const TodoList = () => {
     fetchTodosData(dispatch); // eslint-disable-next-line
   }, []);
 
-  const mapOfTodos = todos.map((item, index) => (
-    <Todo
-      key={index}
-      title={item.title}
-      description={item.description}
-      createdAt={item.createdAt}
-      status={item.status}
-    />
-  ));
+  const mapOfUndoneTodos = todos.map((item, index) =>
+    item.status === 0 ? (
+      <Todo
+        key={index}
+        id={item.id}
+        title={item.title}
+        description={item.description}
+        createdAt={item.createdAt}
+        status={item.status}
+      />
+    ) : null
+  );
+
+  const mapOfDoneTodos = todos.map((item, index) =>
+    item.status === 1 ? (
+      <Todo
+        key={index}
+        id={item.id}
+        title={item.title}
+        description={item.description}
+        createdAt={item.createdAt}
+        status={item.status}
+      />
+    ) : null
+  );
 
   return (
     <div className="ui container" style={{ paddingTop: "2%" }}>
       <div className="list" role="list">
-        <h1>My Todos</h1>
-        {mapOfTodos}
+        {mapOfUndoneTodos}
+        <div
+          style={{ background: "#00d600", height: "8px" }}
+          className="ui divider"
+        ></div>
+        <h3>Completed</h3>
+        <div>{mapOfDoneTodos}</div>
       </div>
     </div>
   );

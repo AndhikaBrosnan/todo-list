@@ -1,8 +1,33 @@
 import React, { useState } from "react";
-import { Button, Header, Modal } from "semantic-ui-react";
+import { useDispatch, useSelector } from "react-redux";
+import { Button, Modal } from "semantic-ui-react";
+import { deleteTodosData, updateTodosData } from "../../redux/action/todo";
+import moment from "moment";
 
-const Todo = ({ title, description, createdAt, status }) => {
+const Todo = ({ id, title, description, createdAt }) => {
   const [show, setShow] = useState(false);
+  const [titleTodo, setTitleTodo] = useState(title);
+  const [descriptionTodo, setDescriptionTodo] = useState(description);
+  const todos = useSelector((state) => state.todo);
+  const dispatch = useDispatch();
+
+  const handleDeleteSubmit = () => {
+    setShow(false);
+    deleteTodosData(dispatch, id);
+  };
+
+  const handleUpdateSubmit = () => {
+    setShow(false);
+    const timeUpdated = moment().format("YYYY-MM-DD h:mm");
+    updateTodosData(
+      dispatch,
+      id,
+      titleTodo,
+      descriptionTodo,
+      timeUpdated,
+      todos.length
+    );
+  };
 
   return (
     <div className="ui card" style={{ width: "100%" }}>
@@ -23,16 +48,42 @@ const Todo = ({ title, description, createdAt, status }) => {
         <Modal.Header>TO DO</Modal.Header>
         <Modal.Content image>
           <Modal.Description>
-            <Header>{title}</Header>
-            {createdAt}
-            <div class="ui divider"></div>
-            <p>{description}</p>
+            <div className="ui form">
+              <div className="field">
+                <input
+                  type="text"
+                  name="title"
+                  placeholder="Title"
+                  value={titleTodo}
+                  onChange={(event) => setTitleTodo(event.target.value)}
+                />
+              </div>
+              {createdAt}
+              <div className="ui divider"></div>
+              <p>
+                <input
+                  type="text"
+                  name="description"
+                  placeholder="Description"
+                  value={descriptionTodo}
+                  onChange={(event) => setDescriptionTodo(event.target.value)}
+                />
+              </p>
+            </div>
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
-          <Button color="black" onClick={() => setShow(false)}>
-            Back
+          <Button className="ui blue button" onClick={handleUpdateSubmit}>
+            Update
           </Button>
+          <Button
+            content="Delete"
+            labelPosition="right"
+            icon="trash"
+            onClick={handleDeleteSubmit}
+            negative
+          />
+
           <Button
             content="OK, Done"
             labelPosition="right"
