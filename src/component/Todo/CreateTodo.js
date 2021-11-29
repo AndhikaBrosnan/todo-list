@@ -25,7 +25,7 @@ const CreateTodo = () => {
 
     const lengthData = todos.length;
     const createdAt = moment().format("YYYY-MM-DD h:mm");
-    postTodosData(dispatch, title, description, createdAt, lengthData);
+    postTodosData(dispatch, title, description, createdAt, lengthData).then();
     resetState();
   };
 
@@ -45,6 +45,7 @@ const CreateTodo = () => {
             type="text"
             name="title"
             placeholder="Title"
+            value={title}
             onChange={(event) => setTitle(event.target.value)}
           />
         </div>
@@ -54,6 +55,7 @@ const CreateTodo = () => {
             type="text"
             name="description"
             placeholder="Description"
+            value={description}
             onChange={(event) => setDescription(event.target.value)}
           />
         </div>
