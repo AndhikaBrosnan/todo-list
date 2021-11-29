@@ -8,7 +8,7 @@ import {
 } from "../../redux/action/todo";
 import moment from "moment";
 
-const Todo = ({ id, title, description, createdAt }) => {
+const Todo = ({ id, title, description, status, createdAt }) => {
   const [show, setShow] = useState(false);
   const [titleTodo, setTitleTodo] = useState(title);
   const [descriptionTodo, setDescriptionTodo] = useState(description);
@@ -88,9 +88,12 @@ const Todo = ({ id, title, description, createdAt }) => {
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
-          <Button className="ui blue button" onClick={handleUpdateSubmit}>
-            Update
-          </Button>
+          {status !== 1 ? (
+            <Button className="ui blue button" onClick={handleUpdateSubmit}>
+              Update
+            </Button>
+          ) : null}
+
           <Button
             content="Delete"
             labelPosition="right"

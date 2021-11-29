@@ -26,7 +26,10 @@ const CreateTodo = () => {
     const lengthData = todos.length;
     const createdAt = moment().format("YYYY-MM-DD h:mm");
     postTodosData(dispatch, title, description, createdAt, lengthData);
+    resetState();
+  };
 
+  const resetState = () => {
     setTitle("");
     setDescription("");
     setError("");
@@ -56,6 +59,9 @@ const CreateTodo = () => {
         </div>
         <button className="ui primary button" onClick={handleSubmit}>
           Submit
+        </button>
+        <button className="ui yellow button" onClick={resetState}>
+          Reset Data
         </button>
         <span className="ui error">{error}</span>
       </div>
