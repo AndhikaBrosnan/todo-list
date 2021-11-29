@@ -11,8 +11,6 @@ const TodoList = () => {
     fetchTodosData(dispatch); // eslint-disable-next-line
   }, []);
 
-  console.log(todos);
-
   const mapOfUndoneTodos = todos.map((item, index) =>
     item.status === 0 ? (
       <Todo

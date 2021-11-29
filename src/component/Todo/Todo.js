@@ -14,7 +14,7 @@ const Todo = ({ id, title, description, createdAt }) => {
   useEffect(() => {
     setTitleTodo(title);
     setDescriptionTodo(description); // eslint-disable-next-line
-  }, []);
+  }, [title, description]);
 
   const handleDeleteSubmit = () => {
     setShow(false);

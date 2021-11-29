@@ -1,4 +1,10 @@
-import { DELETE_TODO, FETCH_TODO, POST_TODO, UPDATE_TODO } from "../type/todo";
+import {
+  DELETE_TODO,
+  DONE_TODO,
+  FETCH_TODO,
+  POST_TODO,
+  UPDATE_TODO,
+} from "../type/todo";
 
 const INIT_TODO = [];
 
@@ -13,6 +19,8 @@ const todoReducer = (todo = INIT_TODO, action) => {
     case UPDATE_TODO:
       const mytodo = todo.filter((item) => item.id !== action.payload.id);
       return [action.payload, ...mytodo];
+    case DONE_TODO:
+      return;
     default:
       return todo;
   }
