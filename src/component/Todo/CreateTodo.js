@@ -10,7 +10,8 @@ const CreateTodo = () => {
   const [error, setError] = useState("");
   const todos = useSelector((state) => state.todo);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (!title && !description) {
       setError("Please fill title & description");
       return;
@@ -26,10 +27,6 @@ const CreateTodo = () => {
     const createdAt = moment().format("YYYY-MM-DD h:mm");
     postTodosData(dispatch, title, description, createdAt, lengthData);
 
-    clearStates();
-  };
-
-  const clearStates = () => {
     setTitle("");
     setDescription("");
     setError("");

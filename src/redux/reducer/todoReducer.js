@@ -20,7 +20,8 @@ const todoReducer = (todo = INIT_TODO, action) => {
       const mytodo = todo.filter((item) => item.id !== action.payload.id);
       return [action.payload, ...mytodo];
     case DONE_TODO:
-      return;
+      const todos = todo.filter((item) => item.id !== action.payload.id);
+      return [action.payload, ...todos];
     default:
       return todo;
   }

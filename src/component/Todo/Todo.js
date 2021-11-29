@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal } from "semantic-ui-react";
-import { deleteTodosData, updateTodosData } from "../../redux/action/todo";
+import {
+  deleteTodosData,
+  doneTodosData,
+  updateTodosData,
+} from "../../redux/action/todo";
 import moment from "moment";
 
 const Todo = ({ id, title, description, createdAt }) => {
@@ -32,6 +36,12 @@ const Todo = ({ id, title, description, createdAt }) => {
       timeUpdated,
       todos.length
     );
+  };
+
+  const handleDoneSubmit = () => {
+    setShow(false);
+    const timeUpdated = moment().format("YYYY-MM-DD h:mm");
+    doneTodosData(dispatch, id, titleTodo, descriptionTodo, timeUpdated);
   };
 
   return (
@@ -93,7 +103,7 @@ const Todo = ({ id, title, description, createdAt }) => {
             content="OK, Done"
             labelPosition="right"
             icon="checkmark"
-            onClick={() => setShow(false)}
+            onClick={handleDoneSubmit}
             positive
           />
         </Modal.Actions>

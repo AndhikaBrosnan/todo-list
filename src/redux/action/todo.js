@@ -56,6 +56,21 @@ export const updateTodosData = async (
   });
 };
 
-export const doneTodosData = async () => {
-  return;
+export const doneTodosData = async (
+  dispatch,
+  id,
+  title,
+  description,
+  createdAt
+) => {
+  dispatch({
+    type: UPDATE_TODO,
+    payload: {
+      id,
+      title,
+      description,
+      status: 1,
+      createdAt,
+    },
+  });
 };
