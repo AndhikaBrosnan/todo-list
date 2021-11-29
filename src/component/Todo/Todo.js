@@ -58,7 +58,7 @@ const Todo = ({ id, title, description, status, createdAt }) => {
         onClose={() => setShow(false)}
         onOpen={() => setShow(true)}
         open={show}
-        trigger={<Button>See Details</Button>}
+        trigger={<Button className="ui button">See Details</Button>}
       >
         <Modal.Header>TO DO</Modal.Header>
         <Modal.Content image>
@@ -88,27 +88,28 @@ const Todo = ({ id, title, description, status, createdAt }) => {
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
+          <Button className="ui blue button" onClick={handleUpdateSubmit}>
+            Update
+          </Button>
+
           {status !== 1 ? (
-            <Button className="ui blue button" onClick={handleUpdateSubmit}>
-              Update
-            </Button>
+            <Button
+              content="Delete"
+              labelPosition="right"
+              icon="trash"
+              onClick={handleDeleteSubmit}
+              negative
+            />
           ) : null}
-
-          <Button
-            content="Delete"
-            labelPosition="right"
-            icon="trash"
-            onClick={handleDeleteSubmit}
-            negative
-          />
-
-          <Button
-            content="OK, Done"
-            labelPosition="right"
-            icon="checkmark"
-            onClick={handleDoneSubmit}
-            positive
-          />
+          {status !== 1 ? (
+            <Button
+              content="OK, Done"
+              labelPosition="right"
+              icon="checkmark"
+              onClick={handleDoneSubmit}
+              positive
+            />
+          ) : null}
         </Modal.Actions>
       </Modal>
     </div>
