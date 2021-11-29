@@ -60,9 +60,7 @@ const CreateTodo = () => {
         <button className="ui primary button" onClick={handleSubmit}>
           Submit
         </button>
-        <button className="ui yellow button" onClick={resetState}>
-          Reset Data
-        </button>
+
         <span className="ui error">{error}</span>
       </div>
     </div>
